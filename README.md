@@ -1,61 +1,61 @@
 # NavMarket Ops
 
-> Je construis et j'exploite, de bout en bout, la plateforme d'une boutique en ligne : du premier serveur Linux jusqu'à Kubernetes sur AWS.
-> Chaque étape est un lab réel, documenté, avec sa preuve.
+> I build and run, end to end, the platform behind an online shop: from the very first Linux server all the way to Kubernetes on AWS.
+> Every step is a real lab, documented, with proof.
 
-**Parcours en cours : séance 1 / 24** · [Voir ma progression en direct](https://nava-techn.github.io/navmarket-roadmap/)
-**LinkedIn :** [Write_me_on_linkdin_and_i_answer_to_you](https://www.linkedin.com/in/valdes-nague/)
+**Current progress: session 1 / 24** · [See my live progress](https://nava-techn.github.io/navmarket-roadmap/)
+**LinkedIn:** [Write to me on LinkedIn, I'll answer](https://www.linkedin.com/in/valdes-nague/)
 
 ---
 
-## Le projet
+## The project
 
-**NavMarket** est une start-up fictive qui vend en ligne des produits de chez Navatech. J'en suis le premier ingénieur d'exploitation (Ops) : je mets en place les serveurs, le réseau, la sécurité, le déploiement et la supervision de sa boutique.
+**NavMarket** is a fictional start-up that sells Navatech products online. I am its first operations (Ops) engineer: I set up the servers, the network, security, deployment and monitoring for its shop.
 
-Le parcours suit l'ordre d'une vraie plateforme qui grandit :
+The learning path follows the order in which a real platform grows:
 
-| Phase | Séances | Thème |
+| Phase | Sessions | Topic |
 | --- | --- | --- |
-| Fondations | 1 à 8 | Linux, réseau, Bash et Python, virtualisation, Git |
-| Application | 9 à 10 | API NestJS + front Next.js + PostgreSQL |
-| Conteneurs et CI/CD | 11 à 12 | Docker, GitHub Actions |
-| Cloud AWS | 13 à 16 | IAM, VPC, EC2, RDS, ECS Fargate |
-| Infrastructure as Code | 17 à 18 | Terraform, Ansible |
-| Kubernetes | 19 à 21 | kind, Helm, Argo CD, EKS, CKA |
-| Observabilité et projet final | 22 à 24 | Prometheus, Grafana, Loki, postmortem |
+| Foundations | 1 to 8 | Linux, networking, Bash and Python, virtualization, Git |
+| Application | 9 to 10 | NestJS API + Next.js front end + PostgreSQL |
+| Containers and CI/CD | 11 to 12 | Docker, GitHub Actions |
+| AWS Cloud | 13 to 16 | IAM, VPC, EC2, RDS, ECS Fargate |
+| Infrastructure as Code | 17 to 18 | Terraform, Ansible |
+| Kubernetes | 19 to 21 | kind, Helm, Argo CD, EKS, CKA |
+| Observability and final project | 22 to 24 | Prometheus, Grafana, Loki, postmortem |
 
-## Labs réalisés
+## Completed labs
 
-Chaque lab a sa fiche dans `docs/` : objectif, démarche, preuve, problème rencontré, ce que j'ai appris.
+Each lab has its own write-up in `docs/`: goal, approach, proof, problem encountered, what I learned.
 
-| Séance | Lab | Fiche | Statut |
+| Session | Lab | Write-up | Status |
 | --- | --- | --- | --- |
-| 1 | Poste de travail Linux (Ubuntu 26.04 LTS en dual boot) | — | ✅ |
+| 1 | Linux workstation (Ubuntu 26.04 LTS in dual boot) | — | ✅ |
 
-*Ce tableau est complété à chaque lab validé.*
+*This table is updated every time a lab is completed.*
 
-## Organisation du dépôt
+## Repository layout
 
 ```
 navmarket-ops/
-├── README.md      ← cette page
-├── docs/          ← une fiche par lab, rangées par séance
-├── scripts/       ← scripts Bash et Python d'exploitation
-├── nginx/         ← configurations du serveur web
-└── site/          ← la vitrine NavMarket
+├── README.md      ← this page
+├── docs/          ← one write-up per lab, organized by session
+├── scripts/       ← Bash and Python operations scripts
+├── nginx/         ← web server configurations
+└── site/          ← the NavMarket storefront
 ```
 
-*Cette structure s'enrichit au fil des séances.*
+*This structure grows session by session.*
 
-## Méthode
+## Method
 
-- **Je tape et je comprends chaque commande** : rien n'est copié sans être expliqué dans la fiche du lab.
-- **Une preuve par lab** : capture, sortie de commande ou lien vers le service en ligne.
-- **Des pannes provoquées puis réparées** : certains labs cassent volontairement quelque chose pour apprendre à diagnostiquer.
-- **Aucun secret dans ce dépôt** : ni mot de passe, ni clé, ni adresse de serveur (voir `.gitignore`).
+- **I type and understand every command**: nothing is copied without being explained in the lab write-up.
+- **One proof per lab**: a screenshot, a command output or a link to the live service.
+- **Failures caused on purpose, then fixed**: some labs deliberately break something so I learn to troubleshoot.
+- **No secrets in this repository**: no passwords, no keys, no server addresses (see `.gitignore`).
 
 ## Contact
 
-- Progression : [voir_ma_progression](https://nava-techn.github.io/navmarket-roadmap/)
-- GitHub : [Mon_Github](https://github.com/nava-techn)
-- LinkedIn : [Write_me_on_linkdin_and_i_answer_to_you](https://www.linkedin.com/in/valdes-nague/)
+- Progress: [See my progress](https://nava-techn.github.io/navmarket-roadmap/)
+- GitHub: [My GitHub](https://github.com/nava-techn)
+- LinkedIn: [Write to me on LinkedIn, I'll answer](https://www.linkedin.com/in/valdes-nague/)
