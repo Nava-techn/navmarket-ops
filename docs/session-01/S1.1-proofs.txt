@@ -1,0 +1,46 @@
+$ hostnamectl
+ Static hostname: navmarket-srv01
+       Icon name: computer-vm
+         Chassis: vm 🖴
+      Machine ID: <redacted>
+         Boot ID: <redacted>
+  Virtualization: kvm
+Operating System: Ubuntu 26.04.1 LTS
+          Kernel: Linux 7.0.0-38-generic
+    Architecture: x86-64
+ Hardware Vendor: QEMU
+  Hardware Model: Standard PC _Q35 + ICH9, 2009_
+Hardware Version: pc-q35-10.2
+Firmware Version: 1.17.0-debian-1.17.0-1ubuntu1
+   Firmware Date: Tue 2014-04-01
+    Firmware Age: 12y 6month 1w 1d
+
+$ cat /etc/hosts
+127.0.0.1 localhost
+127.0.1.1 navmarket-srv01
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+$ apt list --upgradable
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Listing...
+libopeniscsiusr/resolute-updates 2.1.11-3ubuntu3.1 amd64 [upgradable from: 2.1.11-3ubuntu3]
+open-iscsi/resolute-updates 2.1.11-3ubuntu3.1 amd64 [upgradable from: 2.1.11-3ubuntu3]
+
+$ virsh list --all
+ Id   Name              State
+---------------------------------
+ 3    navmarket-srv01   running
+
+
+$ virsh snapshot-list navmarket-srv01
+ Name         Creation Time               State
+---------------------------------------------------
+ S1.1-clean   2026-10-08 17:21:17 +0200   shutoff
