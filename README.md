@@ -34,6 +34,7 @@ Each lab has its own write-up in `docs/`: goal, approach, proof, problem encount
 | 1 | S1.1 First server `navmarket-srv01`: Ubuntu Server 26.04.1 LTS on KVM/libvirt, administered over SSH, fully updated, snapshot | [S1.1](docs/session-01/S1.1-first-server.md) | ✅ |
 | 1 | S1.2 Accounts alice, bob, chloe: shared web directory `/srv/navmarket` (group, setgid, umask) | [S1.2](docs/session-01/S1.2-accounts-permissions.md) | ✅ |
 | 1 | S1.3 NavMarket storefront served by Nginx from `/srv/navmarket` | [S1.3](docs/session-01/S1.3-nginx-storefront.md) | ✅ |
+| 1 | S1.4 OverTheWire Bandit levels 0 → 10: file names, find, grep, pipes, base64 | [S1.4](docs/session-01/S1.4-bandit-0-10.md) | ✅ |
 
 *This table is updated every time a lab is completed.*
 
