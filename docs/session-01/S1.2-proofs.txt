@@ -1,0 +1,29 @@
+$ getent group webteamgrp
+webteamgrp:x:1004:alice,bob
+
+$ id alice
+uid=1001(alice) gid=1001(alice) groups=1001(alice),100(users),1004(webteamgrp)
+
+$ id bob
+uid=1002(bob) gid=1002(bob) groups=1002(bob),100(users),1004(webteamgrp)
+
+$ id chloe
+uid=1003(chloe) gid=1003(chloe) groups=1003(chloe),100(users)
+
+$ ls -ld /srv/navmarket
+drwxrwsr-x 2 root webteamgrp 4096 Oct  9 00:33 /srv/navmarket
+
+$ ls -l /srv/navmarket
+total 4
+-rw-rw-r-- 1 alice webteamgrp 35 Oct  9 00:33 index.html
+
+$ namei -l /srv/navmarket/index.html
+f: /srv/navmarket/index.html
+drwxr-xr-x root  root       /
+drwxr-xr-x root  root       srv
+drwxrwsr-x root  webteamgrp navmarket
+-rw-rw-r-- alice webteamgrp index.html
+
+$ sudo -u chloe touch /srv/navmarket/test-chloe
+touch: cannot touch '/srv/navmarket/test-chloe': Permission denied
+

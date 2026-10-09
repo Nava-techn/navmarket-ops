@@ -32,6 +32,7 @@ Each lab has its own write-up in `docs/`: goal, approach, proof, problem encount
 | --- | --- | --- | --- |
 | 1 | Linux workstation (Ubuntu 26.04 LTS in dual boot) | — | ✅ |
 | 1 | S1.1 First server `navmarket-srv01`: Ubuntu Server 26.04.1 LTS on KVM/libvirt, administered over SSH, fully updated, snapshot | [S1.1](docs/session-01/S1.1-first-server.md) | ✅ |
+| 1 | S1.2 Accounts alice, bob, chloe: shared web directory `/srv/navmarket` (group, setgid, umask) | [S1.2](docs/session-01/S1.2-accounts-permissions.md) | ✅ |
 
 *This table is updated every time a lab is completed.*
 
