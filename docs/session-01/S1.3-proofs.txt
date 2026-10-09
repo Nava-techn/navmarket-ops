@@ -1,0 +1,63 @@
+$ cat /etc/nginx/sites-available/navmarket
+# NavMarket storefront - lab S1.3
+server {
+    listen 80;                       # HTTP
+    server_name navmarket-srv01;     # the server's hostname
+    root /srv/navmarket;             # website files, managed by webteamgrp (S1.2)
+    index index.html;                # file served for "/"
+}
+
+$ ls -l /etc/nginx/sites-enabled/
+total 0
+lrwxrwxrwx 1 root root 36 Oct  9 15:03 navmarket -> /etc/nginx/sites-available/navmarket
+
+$ sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+$ systemctl is-active nginx
+active
+
+$ sudo ss -tlnp
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+LISTEN 0      4096      127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=626,fd=19))
+LISTEN 0      4096         0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=1923,fd=3),("systemd",pid=1,fd=221))
+LISTEN 0      511          0.0.0.0:80        0.0.0.0:*    users:(("nginx",pid=3332,fd=5),("nginx",pid=3331,fd=5),("nginx",pid=1836,fd=5))
+LISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=626,fd=17))
+LISTEN 0      4096            [::]:22           [::]:*    users:(("sshd",pid=1923,fd=4),("systemd",pid=1,fd=222))
+
+$ ls -l /srv/navmarket
+total 4
+-rw-rw-r-- 1 alice webteamgrp 233 Oct  9 15:06 index.html
+
+$ sudo tail -n 5 /var/log/nginx/access.log
+<WORKSTATION_IP> - - [09/Oct/2026:13:52:31 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+<WORKSTATION_IP> - - [09/Oct/2026:15:07:08 +0000] "GET / HTTP/1.1" 200 196 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+<WORKSTATION_IP> - - [09/Oct/2026:15:12:35 +0000] "HEAD / HTTP/1.1" 200 0 "-" "curl/8.18.0"
+<WORKSTATION_IP> - - [09/Oct/2026:15:12:46 +0000] "GET / HTTP/1.1" 200 233 "-" "curl/8.18.0"
+<VM_IP> - - [09/Oct/2026:15:14:03 +0000] "HEAD / HTTP/1.1" 200 0 "-" "curl/8.18.0"
+
+$ curl -I http://<VM_IP>/
+HTTP/1.1 200 OK
+Server: nginx/1.28.3 (Ubuntu)
+Date: Fri, 09 Oct 2026 15:27:01 GMT
+Content-Type: text/html
+Content-Length: 233
+Last-Modified: Fri, 09 Oct 2026 15:06:31 GMT
+Connection: keep-alive
+ETag: "6ac902f7-e9"
+Accept-Ranges: bytes
+
+$ curl -s http://<VM_IP>/
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NavMarket</title>
+</head>
+<body>
+  <h1>NavMarket</h1>
+  <p>Navatech products, delivered fast.</p>
+  <p>Served by Nginx on navmarket-srv01.</p>
+</body>
+</html>
