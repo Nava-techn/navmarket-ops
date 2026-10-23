@@ -1,0 +1,15 @@
+# systemd USER service: starts the retry script every time the computer starts.
+# Install: see docs/session-01/S1.5-oracle-auto-launch.md, step 8.
+[Unit]
+Description=Retry creating navmarket-vps01 on Oracle Cloud Always Free
+
+[Service]
+Type=simple
+# pipx installs oci in ~/.local/bin, which is not in the default PATH of systemd
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=%h/oci-retry/retry-launch.sh
+# The script exits by itself (success, instance already exists, or real error): do not restart it
+Restart=no
+
+[Install]
+WantedBy=default.target

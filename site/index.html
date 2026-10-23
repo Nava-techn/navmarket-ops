@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NavMarket - Navatech products, delivered fast</title>
+  <meta name="description" content="NavMarket is the online shop of Navatech: audio, workspace, power and travel gear, delivered fast. A demo store of a DevOps / Cloud project.">
+  <meta name="theme-color" content="#1f3fd1">
+  <meta property="og:title" content="NavMarket - Navatech products, delivered fast">
+  <meta property="og:description" content="Audio, workspace, power and travel gear by Navatech. Demo store of a DevOps / Cloud project.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/products.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="announce" role="note">
+    <p>Free delivery in France from €50 · <strong>Demo store:</strong> no real orders or payments</p>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="NavMarket home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="9" fill="currentColor"/>
+          <path d="M9 23V9l14 14V9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Nav<b>Market</b></span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main">
+        <a href="#shop">Shop</a>
+        <a href="#why">Why NavMarket</a>
+        <a href="#under-the-hood">Under the hood</a>
+      </nav>
+
+      <button class="cart-button" type="button" data-open-cart aria-label="Open cart, 0 items">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.1 10.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17.5" cy="19.5" r="1.4"/></svg>
+        <span class="cart-label">Cart</span>
+        <span class="cart-count" data-cart-count>0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">New season · Navatech gear</p>
+          <h1>Navatech products, <span class="accent">delivered fast.</span></h1>
+          <p class="lead">Headphones, keyboards, chargers and bags designed to work hard every day. Order before 3 pm, get it in 48 hours.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#shop">Shop the collection</a>
+            <a class="btn btn-ghost" href="#under-the-hood">See how it runs</a>
+          </div>
+          <ul class="hero-facts" aria-label="Our promises">
+            <li><strong>48 h</strong><span>delivery in France</span></li>
+            <li><strong>2 years</strong><span>warranty</span></li>
+            <li><strong>30 days</strong><span>free returns</span></li>
+          </ul>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="tile tile-a" data-icon="headphones"></div>
+          <div class="tile tile-b" data-icon="keyboard"></div>
+          <div class="tile tile-c" data-icon="powerbank"></div>
+          <div class="tile tile-d" data-icon="backpack"></div>
+          <div class="hero-badge">
+            <span class="dot"></span> In stock, ships today
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOP -->
+    <section class="shop" id="shop" aria-labelledby="shop-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">The collection</p>
+            <h2 id="shop-title">Shop Navatech</h2>
+          </div>
+          <p class="result-count" data-result-count aria-live="polite"></p>
+        </div>
+
+        <div class="toolbar">
+          <div class="chips" role="group" aria-label="Filter by category" data-chips></div>
+          <div class="toolbar-right">
+            <label class="search">
+              <span class="visually-hidden">Search products</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+              <input type="search" placeholder="Search products" autocomplete="off" data-search>
+            </label>
+            <label class="sort">
+              <span class="visually-hidden">Sort products</span>
+              <select data-sort>
+                <option value="featured">Featured</option>
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
+                <option value="rating">Best rated</option>
+                <option value="name">Name A to Z</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <ul class="product-grid" data-grid aria-label="Products"></ul>
+
+        <div class="empty" data-empty hidden>
+          <p><strong>No product matches your search.</strong></p>
+          <button class="btn btn-ghost" type="button" data-reset>Reset filters</button>
+        </div>
+
+        <noscript>
+          <p class="noscript">The catalogue needs JavaScript. Please enable it to browse the products.</p>
+        </noscript>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="why" id="why" aria-labelledby="why-title">
+      <div class="container">
+        <p class="eyebrow">Why NavMarket</p>
+        <h2 id="why-title">Built for people who work on the move</h2>
+        <ul class="why-grid">
+          <li>
+            <span class="why-icon" data-icon="truck" aria-hidden="true"></span>
+            <h3>Fast delivery</h3>
+            <p>Ordered before 3 pm, shipped the same day. Free from €50 in France.</p>
+          </li>
+          <li>
+            <span class="why-icon" data-icon="shield" aria-hidden="true"></span>
+            <h3>2-year warranty</h3>
+            <p>Every Navatech product is covered for two years, no questions asked.</p>
+          </li>
+          <li>
+            <span class="why-icon" data-icon="return" aria-hidden="true"></span>
+            <h3>30-day returns</h3>
+            <p>Changed your mind? Send it back within 30 days, return label included.</p>
+          </li>
+          <li>
+            <span class="why-icon" data-icon="chat" aria-hidden="true"></span>
+            <h3>Real humans</h3>
+            <p>Questions before or after buying? A real person answers, 6 days a week.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- UNDER THE HOOD -->
+    <section class="hood" id="under-the-hood" aria-labelledby="hood-title">
+      <div class="container hood-inner">
+        <div class="hood-copy">
+          <p class="eyebrow">Under the hood</p>
+          <h2 id="hood-title">A real shop front, run like production</h2>
+          <p>NavMarket is a fictional company. Its platform is real: it is the running project of a 24-session DevOps / Cloud training. Every piece below is set up, tested and documented step by step.</p>
+          <div class="hood-links">
+            <a class="btn btn-light" href="https://nava-techn.github.io/navmarket-roadmap/" target="_blank" rel="noopener">Live progress</a>
+            <a class="btn btn-outline-light" href="https://github.com/nava-techn/navmarket-ops" target="_blank" rel="noopener">Lab write-ups on GitHub</a>
+          </div>
+        </div>
+
+        <div class="hood-panels">
+          <div class="panel">
+            <h3>How this page reaches you</h3>
+            <ol class="flow">
+              <li><span>Your browser</span><small>HTTP request on port 80</small></li>
+              <li><span>Oracle Cloud network</span><small>security list allows port 80</small></li>
+              <li><span>Server firewall</span><small>iptables rule for port 80</small></li>
+              <li><span>Nginx on Ubuntu</span><small>reads /srv/navmarket</small></li>
+              <li><span>This page</span><small>HTML, CSS and JS, no framework</small></li>
+            </ol>
+          </div>
+
+          <div class="panel">
+            <h3>What comes next</h3>
+            <ul class="roadmap">
+              <li class="done"><span>Nginx on a cloud server</span><small>Session 1</small></li>
+              <li><span>HTTPS and a domain name</span><small>Session 4</small></li>
+              <li><span>App in Next.js, NestJS, PostgreSQL</span><small>Sessions 9-10</small></li>
+              <li><span>Docker images</span><small>Session 11</small></li>
+              <li><span>CI/CD with GitHub Actions</span><small>Session 12</small></li>
+              <li><span>AWS, Terraform, Kubernetes</span><small>Sessions 13-21</small></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <a class="brand brand-footer" href="#top" aria-label="Back to top">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <rect width="32" height="32" rx="9" fill="currentColor"/>
+            <path d="M9 23V9l14 14V9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Nav<b>Market</b></span>
+        </a>
+        <p class="muted">Navatech products, delivered fast.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#shop">Shop</a>
+        <a href="#why">Why NavMarket</a>
+        <a href="#under-the-hood">Under the hood</a>
+        <a href="https://github.com/nava-techn/navmarket-ops" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="muted small footer-note">© <span data-year>2026</span> NavMarket · Fictional brand and demo store: no real orders, no payments.</p>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div class="overlay" data-overlay hidden></div>
+  <aside class="drawer" data-drawer aria-labelledby="cart-title" aria-hidden="true" tabindex="-1">
+    <div class="drawer-head">
+      <h2 id="cart-title">Your cart</h2>
+      <button class="icon-button" type="button" data-close-cart aria-label="Close cart">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <div class="delivery-meter" data-meter>
+        <p data-meter-text></p>
+        <div class="meter"><span data-meter-bar></span></div>
+      </div>
+      <ul class="cart-list" data-cart-list></ul>
+      <div class="cart-empty" data-cart-empty>
+        <p>Your cart is empty.</p>
+        <button class="btn btn-ghost" type="button" data-close-cart>Continue shopping</button>
+      </div>
+    </div>
+    <div class="drawer-foot" data-cart-foot>
+      <dl class="totals">
+        <div><dt>Subtotal</dt><dd data-subtotal>€0.00</dd></div>
+        <div><dt>Delivery</dt><dd data-delivery>€0.00</dd></div>
+        <div class="grand"><dt>Total</dt><dd data-total>€0.00</dd></div>
+      </dl>
+      <button class="btn btn-primary btn-block" type="button" data-checkout>Checkout</button>
+    </div>
+  </aside>
+
+  <!-- DEMO NOTICE -->
+  <dialog class="notice" data-notice aria-labelledby="notice-title">
+    <h2 id="notice-title">This is a demo store</h2>
+    <p>NavMarket is a fictional shop used for a DevOps / Cloud training. Nothing is sold, no order is created and no payment is taken.</p>
+    <p>Thanks for testing it! Your cart stays saved in this browser.</p>
+    <div class="notice-actions">
+      <button class="btn btn-ghost" type="button" data-clear-cart>Empty my cart</button>
+      <button class="btn btn-primary" type="button" data-close-notice>Got it</button>
+    </div>
+  </dialog>
+
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -1,0 +1,3 @@
+# NavMarket is a demo store for a DevOps / Cloud training.
+User-agent: *
+Allow: /
