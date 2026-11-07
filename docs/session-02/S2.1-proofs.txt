@@ -1,0 +1,26 @@
+# S2.1 proofs - 2026-11-07 00:54:22
+
+## srv01: effective SSH settings (sshd -T)
+permitrootlogin no
+pubkeyauthentication yes
+passwordauthentication no
+kbdinteractiveauthentication no
+10-hardening.conf
+50-cloud-init.conf
+
+## srv01: key login
+key login OK as valdes
+
+## srv01: password login refused
+valdes@<VM_IP>: Permission denied (publickey).
+
+## vps01: effective SSH settings (sshd -T)
+permitrootlogin no
+pubkeyauthentication yes
+passwordauthentication no
+kbdinteractiveauthentication no
+10-hardening.conf
+60-cloudimg-settings.conf
+
+## vps01: password login refused
+ubuntu@<PUBLIC_IP>: Permission denied (publickey).

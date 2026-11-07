@@ -1,0 +1,47 @@
+# S2.x incident proofs - 2026-11-07 08:21:53
+
+## 0. Before: site OK
+http=200
+
+## 1. The mistake: one semicolon removed
+5:    root /srv/navmarket
+
+## 2. reload: refused, the old config keeps running
+Job for nginx.service failed.
+See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details.
+reload FAILED
+http=200
+
+## 3. restart: nginx cannot start, the site is DOWN
+Job for nginx.service failed because the control process exited with error code.
+See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details.
+restart FAILED
+failed
+http=000
+
+## 4. Monitoring (S2.2 heartbeat) sees it
+2026-11-07T08:21:52+00:00 navmarket-srv01 navmarket-heartbeat.sh[19334]: storefront http://localhost/ http=200
+2026-11-07T08:22:02+00:00 navmarket-srv01 navmarket-heartbeat.sh[19334]: storefront http://localhost/ http=000
+
+## 5. Diagnose
+2026-11-07T08:21:53+00:00 navmarket-srv01 nginx[27070]: nginx: configuration file /etc/nginx/nginx.conf test failed
+2026-11-07T08:21:53+00:00 navmarket-srv01 systemd[1]: nginx.service: Control process exited, code=exited, status=1/FAILURE
+2026-11-07T08:21:53+00:00 navmarket-srv01 systemd[1]: nginx.service: Failed with result 'exit-code'.
+2026-11-07T08:21:53+00:00 navmarket-srv01 systemd[1]: Failed to start nginx.service - A high performance web server and a reverse proxy server.
+2026/11/07 08:22:05 [emerg] 27088#27088: invalid number of arguments in "root" directive in /etc/nginx/sites-enabled/navmarket:6
+nginx: configuration file /etc/nginx/nginx.conf test failed
+
+## 6. Fix: restore, test, start
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+active
+http=200
+
+## 7. Monitoring back to 200
+2026-11-07T08:22:12+00:00 navmarket-srv01 navmarket-heartbeat.sh[19334]: storefront http://localhost/ http=200
+
+## 7 (checked after the fix)
+sudo: Authentication failed, try again.
+
+sudo: Authentication failed, try again.
+sudo: maximum 3 incorrect authentication attempts

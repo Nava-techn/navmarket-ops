@@ -1,0 +1,50 @@
+# S2.3 proofs - 2026-11-07 07:51:53
+
+## 1. Cron entry
+# S2.3 - Nightly backup, 02:30 every day. Install: /etc/cron.d/navmarket-backup (mode 644)
+# m  h  dom mon dow  user  command
+30 2  *   *   *    root  /usr/local/bin/navmarket-backup.sh
+active
+
+## 2. Before: 10 fake archives, 1 to 10 days old
+total 0
+-rw-r--r-- 1 root root 0 2026-11-06 navmarket-test-1-days.tar.gz
+-rw-r--r-- 1 root root 0 2026-11-05 navmarket-test-2-days.tar.gz
+-rw-r--r-- 1 root root 0 2026-11-04 navmarket-test-3-days.tar.gz
+-rw-r--r-- 1 root root 0 2026-11-03 navmarket-test-4-days.tar.gz
+-rw-r--r-- 1 root root 0 2026-11-02 navmarket-test-5-days.tar.gz
+-rw-r--r-- 1 root root 0 2026-11-01 navmarket-test-6-days.tar.gz
+-rw-r--r-- 1 root root 0 2026-10-31 navmarket-test-7-days.tar.gz
+-rw-r--r-- 1 root root 0 2026-10-30 navmarket-test-8-days.tar.gz
+-rw-r--r-- 1 root root 0 2026-10-29 navmarket-test-9-days.tar.gz
+-rw-r--r-- 1 root root 0 2026-10-28 navmarket-test-10-days.tar.gz
+
+## 3. Run the backup now
+exit code: 0
+
+## 4. After: archives of 7 days or more are gone
+total 20
+-rw-r--r-- 1 root root 19141 2026-11-07 navmarket-2026-11-07_0751.tar.gz
+-rw-r--r-- 1 root root     0 2026-11-06 navmarket-test-1-days.tar.gz
+-rw-r--r-- 1 root root     0 2026-11-05 navmarket-test-2-days.tar.gz
+-rw-r--r-- 1 root root     0 2026-11-04 navmarket-test-3-days.tar.gz
+-rw-r--r-- 1 root root     0 2026-11-03 navmarket-test-4-days.tar.gz
+-rw-r--r-- 1 root root     0 2026-11-02 navmarket-test-5-days.tar.gz
+-rw-r--r-- 1 root root     0 2026-11-01 navmarket-test-6-days.tar.gz
+
+## 5. Inside the new archive
+srv/navmarket/
+srv/navmarket/assets/
+srv/navmarket/assets/css/
+srv/navmarket/assets/css/style.css
+srv/navmarket/assets/img/
+srv/navmarket/assets/img/favicon.svg
+srv/navmarket/assets/js/
+srv/navmarket/assets/js/products.js
+srv/navmarket/assets/js/app.js
+srv/navmarket/robots.txt
+srv/navmarket/README.md
+srv/navmarket/health.json
+
+## 6. Log line
+2026-11-07T07:51:53+00:00 navmarket-srv01 navmarket-backup[26055]: created /var/backups/navmarket/navmarket-2026-11-07_0751.tar.gz (20K), deleted 4 old archive(s)

@@ -1,0 +1,61 @@
+# S2.5 proofs - 2026-11-07 09:18:42 - navmarket-vps01
+
+## Log files
+-rw-r----- 1 www-data adm 61776 Nov  7 08:09 /var/log/nginx/access.log
+-rw-r----- 1 www-data adm 55743 Nov  6 23:35 /var/log/nginx/access.log.1
+-rw-r----- 1 www-data adm 18335 Oct 28 23:57 /var/log/nginx/access.log.10.gz
+-rw-r----- 1 www-data adm 11637 Oct 27 23:57 /var/log/nginx/access.log.11.gz
+-rw-r----- 1 www-data adm 14584 Oct 26 23:57 /var/log/nginx/access.log.12.gz
+-rw-r----- 1 www-data adm 15155 Oct 25 23:59 /var/log/nginx/access.log.13.gz
+-rw-r----- 1 www-data adm  7396 Oct 24 23:42 /var/log/nginx/access.log.14.gz
+-rw-r----- 1 www-data adm  7417 Nov  5 23:51 /var/log/nginx/access.log.2.gz
+-rw-r----- 1 www-data adm  7526 Nov  4 23:46 /var/log/nginx/access.log.3.gz
+-rw-r----- 1 www-data adm 16522 Nov  3 23:49 /var/log/nginx/access.log.4.gz
+-rw-r----- 1 www-data adm 12041 Nov  2 23:38 /var/log/nginx/access.log.5.gz
+-rw-r----- 1 www-data adm  8885 Nov  1 23:53 /var/log/nginx/access.log.6.gz
+-rw-r----- 1 www-data adm 14534 Oct 31 23:55 /var/log/nginx/access.log.7.gz
+-rw-r----- 1 www-data adm 18676 Oct 30 23:57 /var/log/nginx/access.log.8.gz
+-rw-r----- 1 www-data adm 11171 Oct 29 23:58 /var/log/nginx/access.log.9.gz
+
+## Requests analysed: 10477
+
+## Status codes
+   7770 404
+   1781 200
+    305 "-"
+    273 405
+    208 150
+    118 400
+      8 403
+      5 206
+      3 SP1
+      1 e\xEA\xF3"
+      1 \xF2\x8D\xCEl\x85&\xDA8\xD8\xC4\xC4bf\xDF=(\xA5\xD4\xF9\x87\x9D7(\xA7\x00&\xCC\xA8\xCC\xA9\xC0/\xC00\xC0+\xC0,\xC0\x13\xC0\x09\xC0\x14\xC0"
+      1 \xA9\x0C\xFD\x02*#GS#\xF0\x92\x01nw\x0C/\xD2g\x03\x09C\xD0\xFE\x00&\xCC\xA8\xCC\xA9\xC0/\xC00\xC0+\xC0,\xC0\x13\xC0\x09\xC0\x14\xC0"
+      1 \x9A\x9A\x13\x01\x13\x02\x13\x03\xC0+\xC0/\xC0,\xC00\xCC\xA9\xCC\xA8\xC0\x13\xC0\x14\x00\x9C\x00\x9D\x00/\x005\x01\x00\x00\x7F\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00"
+      1 AV;g)\x1Ft\x00>\x13\x02\x13\x03\x13\x01\xC0,\xC00\x00\x9F\xCC\xA9\xCC\xA8\xCC\xAA\xC0+\xC0/\x00\x9E\xC0$\xC0(\x00k\xC0#\xC0'\x00g\xC0"
+      1 -1
+
+## Top 10 client IPs
+   1372 84.247.x.x
+    621 172.235.x.x
+    609 45.138.x.x
+    467 185.177.x.x
+    356 85.155.x.x
+    356 85.155.x.x
+    327 45.138.x.x
+    311 172.234.x.x
+    305 13.61.x.x
+    185 208.167.x.x
+
+## Top 10 URLs answered 404
+    255 /.env
+    186 /SDK/webLanguage
+     82 /favicon.ico
+     37 /.git/config
+     32 /login
+     30 /.env.production
+     30 /.env.local
+     28 /.well-known/security.txt
+     25 /.env.prod
+     25 /.env.backup

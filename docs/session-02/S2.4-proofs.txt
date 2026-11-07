@@ -1,0 +1,21 @@
+# S2.4 proofs - 2026-11-07 08:15:21
+
+## 1. The new disk (vdb, no partition yet)
+NAME                       SIZE TYPE FSTYPE      MOUNTPOINTS
+loop0                     66.8M loop squashfs    /snap/core24/2124
+loop1                     66.8M loop squashfs    /snap/core24/1643
+loop2                      1.5M loop squashfs    /snap/hwctl/131
+loop3                      1.5M loop squashfs    /snap/hwctl/123
+loop4                     50.1M loop squashfs    /snap/snapd/27710
+loop5                     44.7M loop squashfs    /snap/snapd/28254
+sr0                       1024M rom              
+vda                         20G disk             
+├─vda1                       1M part             
+├─vda2                     1.8G part ext4        /boot
+└─vda3                    18.2G part LVM2_member 
+  └─ubuntu--vg-ubuntu--lv   10G lvm  ext4        /
+vdb                          1G disk             
+└─vdb1                    1022M part ext4        /mnt/navdata
+sudo: Authentication failed, try again.
+sudo: Authentication failed, try again.
+Error: Partition(s) on /dev/vdb are being used.

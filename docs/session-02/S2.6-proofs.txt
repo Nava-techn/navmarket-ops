@@ -1,0 +1,29 @@
+# S2.6 proofs - 2026-11-07 09:35:18 - navmarket-vps01
+
+## Period: Oct 21 12:02:16 -> Nov  7 08:30:47
+## Failed or aborted login lines: 56067
+## Different source IPs: 1533
+
+## Top 10 attacking IPs
+   3793 184.185.x.x
+   2659 177.10.x.x
+   2562 20.56.x.x
+   1616 119.15.x.x
+   1397 2.57.x.x
+    999 195.178.x.x
+    768 92.118.x.x
+    706 2.57.x.x
+    677 209.99.x.x
+    671 210.245.x.x
+
+## Top 10 user names tried
+   2485 admin
+    973 user
+    617 debian
+    284 test
+    227 administrator
+    209 oracle
+    166 postgres
+    143 ftpuser
+    140 git
+    133 pakchoi
