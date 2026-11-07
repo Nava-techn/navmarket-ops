@@ -1,0 +1,37 @@
+# S3.2 proofs - 2026-11-07 21:12:42
+== lan-a
+lo               DOWN           
+veth-a@if3       UP             10.10.1.10/24 fe80::5ceb:8cff:fe9e:3e82/64 
+default via 10.10.1.1 dev veth-a 
+10.10.1.0/24 dev veth-a proto kernel scope link src 10.10.1.10 
+== router
+lo               DOWN           
+r-a@if4          UP             10.10.1.1/24 fe80::b460:6cff:feec:51f5/64 
+r-b@if6          UP             10.10.2.1/24 fe80::d06b:80ff:fe4b:6da6/64 
+r-up@if8         UP             10.10.255.2/30 fe80::9470:c0ff:fe7f:6c57/64 
+default via 10.10.255.1 dev r-up 
+10.10.1.0/24 dev r-a proto kernel scope link src 10.10.1.1 
+10.10.2.0/24 dev r-b proto kernel scope link src 10.10.2.1 
+10.10.255.0/30 dev r-up proto kernel scope link src 10.10.255.2 
+== lan-b
+lo               DOWN           
+veth-b@if5       UP             10.10.2.10/24 fe80::504d:68ff:fee8:8662/64 
+default via 10.10.2.1 dev veth-b 
+10.10.2.0/24 dev veth-b proto kernel scope link src 10.10.2.10 
+
+## 1. No default route in lan-a
+ping: connect: Network is unreachable
+
+## 2. Routes OK, forwarding OFF in the router
+2 packets transmitted, 0 received, 100% packet loss, time 1017ms
+
+## 3. Routes + forwarding ON
+--- 10.10.2.10 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1038ms
+rtt min/avg/max/mdev = 0.059/0.455/0.851/0.396 ms
+
+## Path
+ 1?: [LOCALHOST]                      pmtu 1500
+ 1:  10.10.1.1                                             0.335ms 
+ 1:  10.10.1.1                                             0.013ms 
+ 2:  10.10.2.10                                            0.020ms reached

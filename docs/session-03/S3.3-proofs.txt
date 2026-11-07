@@ -1,0 +1,24 @@
+# S3.3 proofs - 2026-11-07 21:13:00
+
+## Received by the TCP server in lan-b:
+hello
+
+## Capture on the router, interface r-a (lan-a side)
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on r-a, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+21:12:46.770900 5e:eb:8c:9e:3e:82 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Request who-has 10.10.1.1 tell 10.10.1.10, length 28
+21:12:46.770912 b6:60:6c:ec:51:f5 > 5e:eb:8c:9e:3e:82, ethertype ARP (0x0806), length 42: Reply 10.10.1.1 is-at b6:60:6c:ec:51:f5, length 28
+21:12:46.770918 5e:eb:8c:9e:3e:82 > b6:60:6c:ec:51:f5, ethertype IPv4 (0x0800), length 98: 10.10.1.10 > 10.10.2.10: ICMP echo request, id 39009, seq 1, length 64
+21:12:46.770936 b6:60:6c:ec:51:f5 > 5e:eb:8c:9e:3e:82, ethertype IPv4 (0x0800), length 98: 10.10.2.10 > 10.10.1.10: ICMP echo reply, id 39009, seq 1, length 64
+21:12:47.795462 5e:eb:8c:9e:3e:82 > b6:60:6c:ec:51:f5, ethertype IPv4 (0x0800), length 74: 10.10.1.10.56826 > 10.10.2.10.8080: Flags [S], seq 2436903050, win 64240, options [mss 1460,sackOK,TS val 2021705075 ecr 0,nop,wscale 9], length 0
+21:12:47.795516 b6:60:6c:ec:51:f5 > 5e:eb:8c:9e:3e:82, ethertype IPv4 (0x0800), length 74: 10.10.2.10.8080 > 10.10.1.10.56826: Flags [S.], seq 3750883124, ack 2436903051, win 65160, options [mss 1460,sackOK,TS val 3884170840 ecr 2021705075,nop,wscale 9], length 0
+21:12:47.795653 5e:eb:8c:9e:3e:82 > b6:60:6c:ec:51:f5, ethertype IPv4 (0x0800), length 66: 10.10.1.10.56826 > 10.10.2.10.8080: Flags [.], ack 1, win 126, options [nop,nop,TS val 2021705075 ecr 3884170840], length 0
+21:12:47.795861 5e:eb:8c:9e:3e:82 > b6:60:6c:ec:51:f5, ethertype IPv4 (0x0800), length 72: 10.10.1.10.56826 > 10.10.2.10.8080: Flags [P.], seq 1:7, ack 1, win 126, options [nop,nop,TS val 2021705075 ecr 3884170840], length 6: HTTP
+21:12:47.795878 b6:60:6c:ec:51:f5 > 5e:eb:8c:9e:3e:82, ethertype IPv4 (0x0800), length 66: 10.10.2.10.8080 > 10.10.1.10.56826: Flags [.], ack 7, win 128, options [nop,nop,TS val 3884170840 ecr 2021705075], length 0
+21:12:47.795891 5e:eb:8c:9e:3e:82 > b6:60:6c:ec:51:f5, ethertype IPv4 (0x0800), length 66: 10.10.1.10.56826 > 10.10.2.10.8080: Flags [F.], seq 7, ack 1, win 126, options [nop,nop,TS val 2021705075 ecr 3884170840], length 0
+21:12:47.795939 b6:60:6c:ec:51:f5 > 5e:eb:8c:9e:3e:82, ethertype IPv4 (0x0800), length 66: 10.10.2.10.8080 > 10.10.1.10.56826: Flags [F.], seq 1, ack 8, win 128, options [nop,nop,TS val 3884170840 ecr 2021705075], length 0
+21:12:47.795960 5e:eb:8c:9e:3e:82 > b6:60:6c:ec:51:f5, ethertype IPv4 (0x0800), length 66: 10.10.1.10.56826 > 10.10.2.10.8080: Flags [.], ack 2, win 126, options [nop,nop,TS val 2021705075 ecr 3884170840], length 0
+
+12 packets captured
+12 packets received by filter
+0 packets dropped by kernel

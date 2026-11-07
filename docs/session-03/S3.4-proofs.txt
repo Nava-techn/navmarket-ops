@@ -1,0 +1,31 @@
+# S3.4 proofs - 2026-11-07 21:13:00
+uplink: enp1s0
+up-host@if7      UP             10.10.255.1/30 fe80::7cdd:7ff:fe1d:969e/64 
+10.10.0.0/16 via 10.10.255.2 dev up-host 
+10.10.255.0/30 dev up-host proto kernel scope link src 10.10.255.1 
+srv01 forwarding: 1
+
+## NAT rule
+table ip lab {
+	chain postrouting {
+		type nat hook postrouting priority srcnat; policy accept;
+		ip saddr 10.10.0.0/16 oifname "enp1s0" masquerade
+	}
+}
+
+## Ping the Internet from lan-a
+--- 1.1.1.1 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 2.794/2.977/3.160/0.183 ms
+
+## On the uplink: the source is srv01, not 10.10.1.10
+[1] 39056
+21:13:02.835397 IP <VM_IP> > 1.1.1.1: ICMP echo request, id 39059, seq 1, length 64
+21:13:02.838330 IP 1.1.1.1 > <VM_IP>: ICMP echo reply, id 39059, seq 1, length 64
+21:13:03.835791 IP <VM_IP> > 1.1.1.1: ICMP echo request, id 39059, seq 2, length 64
+21:13:03.838635 IP 1.1.1.1 > <VM_IP>: ICMP echo reply, id 39059, seq 2, length 64
+[1]+  Done                       timeout 6 tcpdump -i $UP -n -c 4 icmp and host 1.1.1.1 2> /dev/null
+
+## Same ping WITHOUT the NAT rule
+2 packets transmitted, 0 received, 100% packet loss, time 1030ms
+NAT rule restored
