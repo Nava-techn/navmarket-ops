@@ -1,21 +1,21 @@
-# S2.5 proofs - 2026-11-07 09:18:42 - navmarket-vps01
+# S2.5 proofs - 2026-10-30 09:18:42 - navmarket-vps01
 
 ## Log files
--rw-r----- 1 www-data adm 61776 Nov  7 08:09 /var/log/nginx/access.log
--rw-r----- 1 www-data adm 55743 Nov  6 23:35 /var/log/nginx/access.log.1
--rw-r----- 1 www-data adm 18335 Oct 28 23:57 /var/log/nginx/access.log.10.gz
--rw-r----- 1 www-data adm 11637 Oct 27 23:57 /var/log/nginx/access.log.11.gz
--rw-r----- 1 www-data adm 14584 Oct 26 23:57 /var/log/nginx/access.log.12.gz
--rw-r----- 1 www-data adm 15155 Oct 25 23:59 /var/log/nginx/access.log.13.gz
--rw-r----- 1 www-data adm  7396 Oct 24 23:42 /var/log/nginx/access.log.14.gz
--rw-r----- 1 www-data adm  7417 Nov  5 23:51 /var/log/nginx/access.log.2.gz
--rw-r----- 1 www-data adm  7526 Nov  4 23:46 /var/log/nginx/access.log.3.gz
--rw-r----- 1 www-data adm 16522 Nov  3 23:49 /var/log/nginx/access.log.4.gz
--rw-r----- 1 www-data adm 12041 Nov  2 23:38 /var/log/nginx/access.log.5.gz
--rw-r----- 1 www-data adm  8885 Nov  1 23:53 /var/log/nginx/access.log.6.gz
--rw-r----- 1 www-data adm 14534 Oct 31 23:55 /var/log/nginx/access.log.7.gz
--rw-r----- 1 www-data adm 18676 Oct 30 23:57 /var/log/nginx/access.log.8.gz
--rw-r----- 1 www-data adm 11171 Oct 29 23:58 /var/log/nginx/access.log.9.gz
+-rw-r----- 1 www-data adm 61776 Oct 30 08:09 /var/log/nginx/access.log
+-rw-r----- 1 www-data adm 55743 Oct 29 23:35 /var/log/nginx/access.log.1
+-rw-r----- 1 www-data adm 18335 Oct 20 23:57 /var/log/nginx/access.log.10.gz
+-rw-r----- 1 www-data adm 11637 Oct 19 23:57 /var/log/nginx/access.log.11.gz
+-rw-r----- 1 www-data adm 14584 Oct 18 23:57 /var/log/nginx/access.log.12.gz
+-rw-r----- 1 www-data adm 15155 Oct 17 23:59 /var/log/nginx/access.log.13.gz
+-rw-r----- 1 www-data adm  7396 Oct 16 23:42 /var/log/nginx/access.log.14.gz
+-rw-r----- 1 www-data adm  7417 Oct 28 23:51 /var/log/nginx/access.log.2.gz
+-rw-r----- 1 www-data adm  7526 Oct 27 23:46 /var/log/nginx/access.log.3.gz
+-rw-r----- 1 www-data adm 16522 Oct 26 23:49 /var/log/nginx/access.log.4.gz
+-rw-r----- 1 www-data adm 12041 Oct 25 23:38 /var/log/nginx/access.log.5.gz
+-rw-r----- 1 www-data adm  8885 Oct 24 23:53 /var/log/nginx/access.log.6.gz
+-rw-r----- 1 www-data adm 14534 Oct 23 23:55 /var/log/nginx/access.log.7.gz
+-rw-r----- 1 www-data adm 18676 Oct 22 23:57 /var/log/nginx/access.log.8.gz
+-rw-r----- 1 www-data adm 11171 Oct 21 23:58 /var/log/nginx/access.log.9.gz
 
 ## Requests analysed: 10477
 

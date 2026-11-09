@@ -1,4 +1,4 @@
-# S2.2 proofs - 2026-11-07 00:19:21
+# S2.2 proofs - 2026-10-26 00:19:21
 
 ## 1. Service enabled and running
 enabled
@@ -11,15 +11,15 @@ NRestarts: 1
 active
 
 ## 3. Journal
-2026-11-07T00:19:09+00:00 navmarket-srv01 systemd[1]: Started navmarket-heartbeat.service - NavMarket heartbeat (checks the storefront every 10 s).
-2026-11-07T00:19:09+00:00 navmarket-srv01 navmarket-heartbeat.sh[3127]: storefront http://localhost/ http=403
-2026-11-07T00:19:19+00:00 navmarket-srv01 navmarket-heartbeat.sh[3127]: storefront http://localhost/ http=403
-2026-11-07T00:19:21+00:00 navmarket-srv01 systemd[1]: navmarket-heartbeat.service: Main process exited, code=killed, status=9/KILL
-2026-11-07T00:19:21+00:00 navmarket-srv01 systemd[1]: navmarket-heartbeat.service: Failed with result 'signal'.
-2026-11-07T00:19:26+00:00 navmarket-srv01 systemd[1]: navmarket-heartbeat.service: Scheduled restart job, restart counter is at 1.
-2026-11-07T00:19:26+00:00 navmarket-srv01 systemd[1]: Started navmarket-heartbeat.service - NavMarket heartbeat (checks the storefront every 10 s).
-2026-11-07T00:19:26+00:00 navmarket-srv01 navmarket-heartbeat.sh[3421]: storefront http://localhost/ http=403
-2026-11-07T00:25:46+00:00 navmarket-srv01 navmarket-heartbeat.sh[3421]: storefront http://localhost/ http=200
-2026-11-07T00:25:56+00:00 navmarket-srv01 navmarket-heartbeat.sh[3421]: storefront http://localhost/ http=200
-2026-11-07T00:26:06+00:00 navmarket-srv01 navmarket-heartbeat.sh[3421]: storefront http://localhost/ http=200
-2026-11-07T00:26:16+00:00 navmarket-srv01 navmarket-heartbeat.sh[3421]: storefront http://localhost/ http=200
+2026-10-26T00:19:09+00:00 navmarket-srv01 systemd[1]: Started navmarket-heartbeat.service - NavMarket heartbeat (checks the storefront every 10 s).
+2026-10-26T00:19:09+00:00 navmarket-srv01 navmarket-heartbeat.sh[3127]: storefront http://localhost/ http=403
+2026-10-26T00:19:19+00:00 navmarket-srv01 navmarket-heartbeat.sh[3127]: storefront http://localhost/ http=403
+2026-10-26T00:19:21+00:00 navmarket-srv01 systemd[1]: navmarket-heartbeat.service: Main process exited, code=killed, status=9/KILL
+2026-10-26T00:19:21+00:00 navmarket-srv01 systemd[1]: navmarket-heartbeat.service: Failed with result 'signal'.
+2026-10-26T00:19:26+00:00 navmarket-srv01 systemd[1]: navmarket-heartbeat.service: Scheduled restart job, restart counter is at 1.
+2026-10-26T00:19:26+00:00 navmarket-srv01 systemd[1]: Started navmarket-heartbeat.service - NavMarket heartbeat (checks the storefront every 10 s).
+2026-10-26T00:19:26+00:00 navmarket-srv01 navmarket-heartbeat.sh[3421]: storefront http://localhost/ http=403
+2026-10-26T00:25:46+00:00 navmarket-srv01 navmarket-heartbeat.sh[3421]: storefront http://localhost/ http=200
+2026-10-26T00:25:56+00:00 navmarket-srv01 navmarket-heartbeat.sh[3421]: storefront http://localhost/ http=200
+2026-10-26T00:26:06+00:00 navmarket-srv01 navmarket-heartbeat.sh[3421]: storefront http://localhost/ http=200
+2026-10-26T00:26:16+00:00 navmarket-srv01 navmarket-heartbeat.sh[3421]: storefront http://localhost/ http=200

@@ -1,4 +1,4 @@
-# S2.x incident proofs - 2026-11-07 08:21:53
+# S2.x incident proofs - 2026-11-01 08:21:53
 
 ## 0. Before: site OK
 http=200
@@ -20,14 +20,14 @@ failed
 http=000
 
 ## 4. Monitoring (S2.2 heartbeat) sees it
-2026-11-07T08:21:52+00:00 navmarket-srv01 navmarket-heartbeat.sh[19334]: storefront http://localhost/ http=200
-2026-11-07T08:22:02+00:00 navmarket-srv01 navmarket-heartbeat.sh[19334]: storefront http://localhost/ http=000
+2026-11-01T08:21:52+00:00 navmarket-srv01 navmarket-heartbeat.sh[19334]: storefront http://localhost/ http=200
+2026-11-01T08:22:02+00:00 navmarket-srv01 navmarket-heartbeat.sh[19334]: storefront http://localhost/ http=000
 
 ## 5. Diagnose
-2026-11-07T08:21:53+00:00 navmarket-srv01 nginx[27070]: nginx: configuration file /etc/nginx/nginx.conf test failed
-2026-11-07T08:21:53+00:00 navmarket-srv01 systemd[1]: nginx.service: Control process exited, code=exited, status=1/FAILURE
-2026-11-07T08:21:53+00:00 navmarket-srv01 systemd[1]: nginx.service: Failed with result 'exit-code'.
-2026-11-07T08:21:53+00:00 navmarket-srv01 systemd[1]: Failed to start nginx.service - A high performance web server and a reverse proxy server.
+2026-11-01T08:21:53+00:00 navmarket-srv01 nginx[27070]: nginx: configuration file /etc/nginx/nginx.conf test failed
+2026-11-01T08:21:53+00:00 navmarket-srv01 systemd[1]: nginx.service: Control process exited, code=exited, status=1/FAILURE
+2026-11-01T08:21:53+00:00 navmarket-srv01 systemd[1]: nginx.service: Failed with result 'exit-code'.
+2026-11-01T08:21:53+00:00 navmarket-srv01 systemd[1]: Failed to start nginx.service - A high performance web server and a reverse proxy server.
 2026/11/07 08:22:05 [emerg] 27088#27088: invalid number of arguments in "root" directive in /etc/nginx/sites-enabled/navmarket:6
 nginx: configuration file /etc/nginx/nginx.conf test failed
 
@@ -38,8 +38,8 @@ active
 http=200
 
 ## 7. Monitoring back to 200
-2026-11-07T08:22:12+00:00 navmarket-srv01 navmarket-heartbeat.sh[19334]: storefront http://localhost/ http=200
+2026-11-01T08:22:12+00:00 navmarket-srv01 navmarket-heartbeat.sh[19334]: storefront http://localhost/ http=200
 
 ## 7 (checked after the fix)
-2026-11-07T09:03:05+00:00 navmarket-srv01 navmarket-heartbeat.sh[19334]: storefront http://localhost/ http=200
-2026-11-07T09:03:15+00:00 navmarket-srv01 navmarket-heartbeat.sh[19334]: storefront http://localhost/ http=200
+2026-11-01T09:03:05+00:00 navmarket-srv01 navmarket-heartbeat.sh[19334]: storefront http://localhost/ http=200
+2026-11-01T09:03:15+00:00 navmarket-srv01 navmarket-heartbeat.sh[19334]: storefront http://localhost/ http=200

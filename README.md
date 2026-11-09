@@ -3,7 +3,7 @@
 > I build and run, end to end, the platform behind an online shop: from the very first Linux server all the way to Kubernetes on AWS.
 > Every step is a real lab, documented, with proof.
 
-**Current progress: session 1 / 24** · [See my live progress](https://nava-techn.github.io/navmarket-roadmap/)
+**Current progress: session 3 / 24** · [See my live progress](https://nava-techn.github.io/navmarket-roadmap/)
 **LinkedIn:** [Write to me on LinkedIn, I'll answer](https://www.linkedin.com/in/valdes-nague/)
 
 ---
@@ -36,6 +36,8 @@ Each lab has its own write-up in `docs/`: goal, approach, proof, problem encount
 | 1 | S1.3 NavMarket storefront served by Nginx from `/srv/navmarket` | [S1.3](docs/session-01/S1.3-nginx-storefront.md) | ✅ |
 | 1 | S1.4 OverTheWire Bandit levels 0 → 10: file names, find, grep, pipes, base64 | [S1.4](docs/session-01/S1.4-bandit-0-10.md) | ✅ |
 | 1 | S1.5 Storefront public over HTTPS with a Cloudflare Quick Tunnel (plan B, Oracle out of capacity) | [S1.5](docs/session-01/S1.5-cloudflare-tunnel.md) | ✅ |
+| 2 | Linux administration: SSH with keys only, self-healing systemd service, nightly backups, full-disk diagnosis, analysis of real attacks in the logs, Nginx incident | [Session 2](docs/session-02/) | ✅ |
+| 3 | Networking: addressing plan, Linux router, annotated packet capture, NAT to the Internet | [Session 3](docs/session-03/) | ✅ |
 
 *This table is updated every time a lab is completed.*
 

@@ -1,4 +1,4 @@
-# S3.2 proofs - 2026-11-07 21:12:42
+# S3.2 proofs - 2026-11-05 21:12:42
 == lan-a
 lo               DOWN           
 veth-a@if3       UP             10.10.1.10/24 fe80::5ceb:8cff:fe9e:3e82/64 

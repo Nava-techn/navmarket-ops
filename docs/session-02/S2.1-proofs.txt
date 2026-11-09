@@ -1,4 +1,4 @@
-# S2.1 proofs - 2026-11-07 00:54:22
+# S2.1 proofs - 2026-10-26 00:54:22
 
 ## srv01: effective SSH settings (sshd -T)
 permitrootlogin no

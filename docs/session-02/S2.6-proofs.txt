@@ -1,6 +1,6 @@
-# S2.6 proofs - 2026-11-07 09:35:18 - navmarket-vps01
+# S2.6 proofs - 2026-10-30 09:35:18 - navmarket-vps01
 
-## Period: Oct 21 12:02:16 -> Nov  7 08:30:47
+## Period: Oct 13 12:02:16 -> Oct 30 08:30:47
 ## Failed or aborted login lines: 56067
 ## Different source IPs: 1533
 
