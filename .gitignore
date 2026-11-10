@@ -1,0 +1,10 @@
+# Private keys and CA material never go to Git (lesson from S4.3)
+*.key
+*.csr
+*.srl
+ca.crt
+navmarket.crt
+navmarket-tls.conf
+# Python
+__pycache__/
+*.pyc

@@ -1,0 +1,13 @@
+sku,name,category,price,stock,reorder_level
+nava-studio,Nava Studio Headphones,audio,149,34,10
+nava-buds,Nava Buds Pro,audio,89,8,15
+pulse-mini,Pulse Mini Speaker,audio,49,61,20
+keystone-75,Keystone 75 Keyboard,workspace,119,12,10
+glide-mouse,Glide Wireless Mouse,workspace,39,0,25
+halo-lamp,Halo Desk Lamp,workspace,59,27,10
+riser-stand,Riser Laptop Stand,workspace,45,40,10
+volt-20k,Volt 20K Power Bank,power,42,5,20
+volt-65,Volt 65W GaN Charger,power,35,90,30
+braid-cable,Braid USB-C Cable 2 m,power,14,250,100
+transit-20,Transit 20L Backpack,carry,79,18,8
+shell-sleeve,Shell 14in Laptop Sleeve,carry,29,44,15

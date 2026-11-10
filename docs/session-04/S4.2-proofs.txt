@@ -1,0 +1,35 @@
+# S4.2 proofs - 2026-11-10 17:03:54
+
+## 1. lan-a before: no IP address
+veth-a@if9       UP             
+
+## 2. DHCP client in lan-a
+veth-a: adding route to 10.10.1.0/24
+veth-a: adding default route via 10.10.1.1
+exiting due to oneshot
+dhcpcd exited
+
+## 3. The 4 DHCP messages, captured on the router (DORA)
+	    DHCP-Message (53), length 1: Discover
+	  Your-IP 10.10.1.131
+	  Server-IP 10.10.1.1
+	    DHCP-Message (53), length 1: Offer
+	    DHCP-Message (53), length 1: Request
+	  Your-IP 10.10.1.131
+	  Server-IP 10.10.1.1
+	    DHCP-Message (53), length 1: ACK
+
+## 4. lan-a after: IP and default route received by DHCP
+veth-a@if9       UP             10.10.1.131/24 
+default via 10.10.1.1 dev veth-a proto dhcp src 10.10.1.131 metric 1010 
+10.10.1.0/24 dev veth-a proto dhcp scope link src 10.10.1.131 metric 1010 
+
+## 5. The lease on the server
+1794333838 5e:eb:8c:9e:3e:82 10.10.1.131 client-a ff:8c:9e:3e:82:00:01:00:01:32:86:0a:fb:5e:eb:8c:9e:3e:82
+
+## 6. DHCP also registered the name in DNS
+10.10.1.131
+
+## 7. And the network works: lan-a -> lan-b through the router
+2 packets transmitted, 2 received, 0% packet loss, time 1059ms
+rtt min/avg/max/mdev = 0.054/0.275/0.497/0.221 ms

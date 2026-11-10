@@ -1,0 +1,41 @@
+# S4.1 proofs - 2026-11-10 16:54:09
+
+## Config
+interface=enp1s0
+bind-interfaces
+domain=navmarket.lan
+local=/navmarket.lan/
+host-record=navmarket-srv01.navmarket.lan,<VM_IP>
+cname=www.navmarket.lan,navmarket-srv01.navmarket.lan
+no-resolv
+server=1.1.1.1
+
+## Service and port 53
+active
+UNCONN 0      0                             127.0.0.1:53        0.0.0.0:*    users:(("dnsmasq",pid=80443,fd=6))         
+UNCONN 0      0                         <VM_IP>:53        0.0.0.0:*    users:(("dnsmasq",pid=80443,fd=4))         
+UNCONN 0      0                                 [::1]:53           [::]:*    users:(("dnsmasq",pid=80443,fd=10))        
+UNCONN 0      0      [fe80::5054:ff:fe70:d489]%enp1s0:53           [::]:*    users:(("dnsmasq",pid=80443,fd=8))         
+
+## A record + alias
+www.navmarket.lan.	0	IN	CNAME	navmarket-srv01.navmarket.lan.
+navmarket-srv01.navmarket.lan. 0 IN	A	<VM_IP>
+
+## Reverse lookup (IP -> name)
+navmarket-srv01.navmarket.lan.
+
+## Unknown name in navmarket.lan
+;; ->>HEADER<<- opcode: QUERY, status: NXDOMAIN, id: 54607
+
+## Other names are forwarded to 1.1.1.1
+140.82.121.3
+
+## From the workstation (split DNS: only *.navmarket.lan goes to srv01)
+Link 3 (virbr0): ~navmarket.lan
+www.navmarket.lan: <VM_IP>                            -- link: virbr0
+                   (navmarket-srv01.navmarket.lan)
+
+-- Information acquired via protocol DNS in 1.9ms.
+-- Data is authenticated: no; Data was acquired via local or encrypted transport: no
+-- Data from: network
+HTTP/1.1 200 OK
