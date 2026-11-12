@@ -1,0 +1,40 @@
+# S4.3 proofs - 2026-11-12 14:49:59
+
+## 1. The server certificate, signed by my lab CA
+subject=CN=www.navmarket.lan
+issuer=CN=NavMarket Lab Root CA
+X509v3 Subject Alternative Name: 
+    DNS:www.navmarket.lan, DNS:navmarket-srv01.navmarket.lan
+notAfter=Dec 12 17:15:26 2027 GMT
+~/navmarket-ca/navmarket.crt: OK
+
+## 2. With a trust store that does not contain my CA: refused
+curl: (60) SSL certificate OpenSSL verify result: unable to get local issuer certificate (20)
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the webpage mentioned above.
+curl exit code: 60 (60 = certificate not trusted)
+
+## 3. With my CA trusted: HTTPS works, without -k
+HTTP/1.1 200 OK
+{
+  "service": "navmarket-storefront",
+  "status": "ok",
+  "version": "1.0.0"
+}
+
+
+## 4. TLS handshake
+subject=CN=www.navmarket.lan
+issuer=CN=NavMarket Lab Root CA
+Protocol: TLSv1.3
+Verify return code: 0 (ok)
+
+## 5. HTTP on the name redirects to HTTPS
+HTTP/1.1 301 Moved Permanently
+Location: https://www.navmarket.lan/
+
+## 6. HTTP by IP still serves the storefront
+HTTP/1.1 200 OK

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Nginx access log analysis with a JSON export (Session 5, lab S5.4).
 
-The Python version of scripts/logs/nginx-report.sh (S2.5): reads Nginx logs in
+The Python version of scripts/session-02/s2.5-nginx-report.sh (S2.5): reads Nginx logs in
 the default "combined" format, plain or .gz, and writes a JSON report.
 
 Usage:

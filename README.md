@@ -47,7 +47,7 @@ Each lab has its own write-up in `docs/`: goal, approach, proof, problem encount
 navmarket-ops/
 ├── README.md      ← this page
 ├── docs/          ← one write-up per lab, organized by session
-├── scripts/       ← Bash and Python operations scripts
+├── scripts/       ← Bash and Python scripts, one folder per session (session-01...)
 ├── nginx/         ← web server configurations
 └── site/          ← the NavMarket storefront
 ```

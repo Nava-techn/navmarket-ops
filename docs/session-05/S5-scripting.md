@@ -4,10 +4,10 @@
 
 | Lab | What | Script | Status |
 | --- | --- | --- | --- |
-| S5.1 | Idempotent deploy, shellcheck clean | `scripts/deploy/deploy-storefront.sh` | written + tested, to run on servers |
-| S5.2 | Health check with an exit code | `scripts/health/healthcheck.sh` | written + tested, to run |
-| S5.3 | Navatech product inventory in Python | `scripts/python/inventory.py` | written + tested |
-| S5.4 | Log analysis in Python, JSON export | `scripts/python/log_report.py` | written + tested, to run on real logs |
+| S5.1 | Idempotent deploy, shellcheck clean | `scripts/session-05/s5.1-deploy-storefront.sh` | written + tested, to run on servers |
+| S5.2 | Health check with an exit code | `scripts/session-05/s5.2-healthcheck.sh` | written + tested, to run |
+| S5.3 | Navatech product inventory in Python | `scripts/session-05/s5.3-inventory.py` | written + tested |
+| S5.4 | Log analysis in Python, JSON export | `scripts/session-05/s5.4-log-report.py` | written + tested, to run on real logs |
 
 Tested on 10 Nov in a sandbox (sample data, local web servers). The proofs below must come from **my** servers.
 
@@ -28,10 +28,10 @@ How it works:
 Good Bash habits used: `set -euo pipefail`, `getopts`, quoted variables, `trap` cleanup, a function sent to the server with `declare -f`, `shellcheck` with **0 warnings**.
 
 ```bash
-shellcheck scripts/deploy/deploy-storefront.sh          # nothing printed = clean
-scripts/deploy/deploy-storefront.sh vps01               # 1st run: deploys
-scripts/deploy/deploy-storefront.sh vps01               # 2nd run: "Nothing to do"
-scripts/deploy/deploy-storefront.sh -r <srv01 root> srv01
+shellcheck scripts/session-05/s5.1-deploy-storefront.sh          # nothing printed = clean
+scripts/session-05/s5.1-deploy-storefront.sh vps01               # 1st run: deploys
+scripts/session-05/s5.1-deploy-storefront.sh vps01               # 2nd run: "Nothing to do"
+scripts/session-05/s5.1-deploy-storefront.sh -r <srv01 root> srv01
 ```
 
 ## S5.2 Health check: `healthcheck.sh`
@@ -45,19 +45,19 @@ Per URL: HTTP `200`, `"status": "ok"` in `health.json`, response time, days left
 | `2` | CRITICAL (down, wrong answer, expired) | |
 
 ```bash
-scripts/health/healthcheck.sh https://www.navmarket.lan/health.json http://<VPS_IP>/health.json; echo "exit code: $?"
+scripts/session-05/s5.2-healthcheck.sh https://www.navmarket.lan/health.json http://<VPS_IP>/health.json; echo "exit code: $?"
 ```
 
 Sandbox test: `OK ... HTTP 200 in 3 ms` / `CRITICAL ... HTTP 404` → exit `2`; certificate check `valid for 396 more days`.
 
 ## S5.3 Inventory in Python: `inventory.py`
 
-Reads `scripts/python/data/inventory.csv` (the 12 storefront products + stock), **checks every row** (bad numbers, duplicates: skipped and listed, exit `1`).
+Reads `scripts/session-05/s5.3-inventory.csv` (the 12 storefront products + stock), **checks every row** (bad numbers, duplicates: skipped and listed, exit `1`).
 
 ```bash
-python3 scripts/python/inventory.py report        # units and stock value per category
-python3 scripts/python/inventory.py low           # what to reorder
-python3 scripts/python/inventory.py json -o /tmp/inventory.json
+python3 scripts/session-05/s5.3-inventory.py report        # units and stock value per category
+python3 scripts/session-05/s5.3-inventory.py low           # what to reorder
+python3 scripts/session-05/s5.3-inventory.py json -o /tmp/inventory.json
 ```
 
 Sandbox output: 12 products, 589 units, **23,146 €** of stock; to reorder: Glide mouse (**out of stock**), Volt 20K, Nava Buds.
@@ -70,7 +70,7 @@ The Python version of `nginx-report.sh` (S2.5): `.log` and `.gz`, oldest first, 
 JSON: period, requests, status codes, error rate, top IPs, top paths, requests per hour, **suspicious paths** (`wp-`, `.php`, `.env`, `.git`...). `--mask` hides the end of IPs before anything goes to Git.
 
 ```bash
-scp scripts/python/log_report.py srv01:/tmp/
+scp scripts/session-05/s5.4-log-report.py srv01:/tmp/
 ssh -t srv01 'sudo python3 /tmp/log_report.py /var/log/nginx/access.log* --mask -o /tmp/S5.4-report.json'
 scp srv01:/tmp/S5.4-report.json docs/session-05/
 ```

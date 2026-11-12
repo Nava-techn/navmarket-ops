@@ -5,10 +5,10 @@ Reads a CSV of products (sku, name, category, price, stock, reorder_level),
 checks every row, then prints a report, the products to reorder, or a JSON export.
 
 Usage:
-    python3 scripts/python/inventory.py report
-    python3 scripts/python/inventory.py low
-    python3 scripts/python/inventory.py json -o inventory.json
-    python3 scripts/python/inventory.py --file other.csv report
+    python3 scripts/session-05/s5.3-inventory.py report
+    python3 scripts/session-05/s5.3-inventory.py low
+    python3 scripts/session-05/s5.3-inventory.py json -o inventory.json
+    python3 scripts/session-05/s5.3-inventory.py --file other.csv report
 
 Exit codes: 0 OK, 1 invalid rows found (they are skipped and listed on stderr),
 2 file missing or unreadable.
@@ -20,7 +20,7 @@ import sys
 from dataclasses import dataclass, asdict
 from pathlib import Path
 
-DEFAULT_FILE = Path(__file__).parent / "data" / "inventory.csv"
+DEFAULT_FILE = Path(__file__).parent / "s5.3-inventory.csv"
 COLUMNS = ["sku", "name", "category", "price", "stock", "reorder_level"]
 
 

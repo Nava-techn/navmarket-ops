@@ -1,0 +1,23 @@
+# Session 4, lab S4.1: make the workstation's split DNS permanent.
+# "resolvectl dns/domain" only lives in memory: it is lost when the computer
+# reboots or when libvirt recreates virbr0. This unit runs every time virbr0 appears.
+#
+# Install (on the WORKSTATION, SRV01_IP replaced by srv01's address):
+#   IP=$(ssh -G srv01 | awk '/^hostname /{print $2}')
+#   sed "s/SRV01_IP/$IP/" scripts/session-04/s4.1-navmarket-split-dns.service \
+#     | sudo tee /etc/systemd/system/navmarket-split-dns.service >/dev/null
+#   sudo systemctl daemon-reload && sudo systemctl enable --now navmarket-split-dns
+
+[Unit]
+Description=Split DNS: send *.navmarket.lan to srv01 (NavMarket lab S4.1)
+BindsTo=sys-subsystem-net-devices-virbr0.device
+After=sys-subsystem-net-devices-virbr0.device systemd-resolved.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/resolvectl dns virbr0 SRV01_IP
+ExecStart=/usr/bin/resolvectl domain virbr0 ~navmarket.lan
+
+[Install]
+WantedBy=sys-subsystem-net-devices-virbr0.device

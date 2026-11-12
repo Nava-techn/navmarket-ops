@@ -4,15 +4,15 @@
 
 | Lab | What | Script | Status |
 | --- | --- | --- | --- |
-| S4.1 | Internal DNS for `navmarket.lan` (dnsmasq + split DNS) | manual, see below | ✅ 10 Nov |
+| S4.1 | Internal DNS for `navmarket.lan` (dnsmasq + split DNS) | manual + `scripts/session-04/s4.1-navmarket-split-dns.service` | ✅ 10 Nov |
 | S4.2 | Automatic DHCP (DORA) | manual, see below | ✅ 10 Nov |
-| S4.3 | HTTPS with my own certificate authority | `scripts/tls/s4.3-https-lab-ca.sh` | to run |
-| S4.4 | Firewall: only 22, 80, 443 open | `scripts/firewall/s4.4-firewall.sh` | to run |
-| S4.5 | Reverse proxy in front of 2 web servers | `scripts/proxy/s4.5-reverse-proxy.sh` | to run |
-| S4.6 | Real domain + Let's Encrypt + fail2ban (vps01) | `scripts/tls/s4.6-letsencrypt-vps.sh` | to run |
-| S4.x | Incident: name no longer resolves, wrong gateway | `scripts/network/s4x-incident.sh` | to run |
+| S4.3 | HTTPS with my own certificate authority | `scripts/session-04/s4.3-https-lab-ca.sh` | ✅ 12 Nov |
+| S4.4 | Firewall: only 22, 80, 443 open | `scripts/session-04/s4.4-firewall.sh` | to run |
+| S4.5 | Reverse proxy in front of 2 web servers | `scripts/session-04/s4.5-reverse-proxy.sh` | to run |
+| S4.6 | Real domain + Let's Encrypt + fail2ban (vps01) | `scripts/session-04/s4.6-letsencrypt-vps.sh` | to run |
+| S4.x | Incident: name no longer resolves, wrong gateway | `scripts/session-04/s4.x-incident.sh` | to run |
 
-Every server-side script writes its own proofs and is run through `scripts/run-on-srv01.sh`
+Every server-side script writes its own proofs and is run through `scripts/session-04/s4.4-run-on-srv01.sh`
 (copy, `sudo` once, proofs copied back with the IP masked).
 
 ---
@@ -46,7 +46,7 @@ Every server-side script writes its own proofs and is run through `scripts/run-o
 
 | File | Where | Secret |
 | --- | --- | --- |
-| `ca.key` | only `~/navmarket-ca` on my workstation | 🔴 never in Git, never on a server |
+| `ca.key` | only `~/projets/navmarket-ca` on my workstation | 🔴 never in Git, never on a server |
 | `ca.crt` | trusted by my workstation | no |
 | `navmarket.key` | srv01 `/etc/ssl/navmarket`, mode 600 | 🔴 |
 | `navmarket.crt` | srv01 | no |
@@ -56,18 +56,27 @@ Every server-side script writes its own proofs and is run through `scripts/run-o
 - HTTP on the lab names → `301` to HTTPS; HTTP by IP still works.
 
 ```bash
-scripts/tls/s4.3-https-lab-ca.sh     # from the repo root, on the workstation
+scripts/session-04/s4.3-https-lab-ca.sh     # from the repo root, on the workstation
 ```
 
-> **Incident during the lab (10 Nov):** the first run created the CA files **inside the repo**. Nothing was committed. The script now moves them to `~/navmarket-ca`, and `.gitignore` blocks `*.key`, `*.csr`, `ca.crt` for good.
+> **Incident during the lab (10 Nov):** the first run created the CA files **inside the repo**. Nothing was committed. The script now moves them to `~/projets/navmarket-ca`, and `.gitignore` blocks `*.key`, `*.csr`, `ca.crt` for good.
 
-**Expected:** issuer `NavMarket Lab Root CA` · curl with another trust store: exit `60` · after trust: `200` · `TLSv1.3`, `Verify return code: 0` · HTTP → `301`.
+**Done step by step on 12 Nov:** look at srv01 first (one site, `root /srv/navmarket`, port 80 only) → certificate installed (`.crt` 644, `.key` 600, root only) → `navmarket-tls` site (port 80 on the `.lan` names redirects, port 443 serves the storefront), `nginx -t` then `reload` → CA trusted on the workstation (`update-ca-certificates`).
+
+**Proof** ([S4.3-proofs.txt](S4.3-proofs.txt)): issuer `NavMarket Lab Root CA`, `OK` · another trust store: exit `60` · with my CA: `200 OK` without `-k` · `TLSv1.3`, `Verify return code: 0 (ok)` · HTTP on the name → `301` to HTTPS · HTTP by IP still `200`.
+
+**Problems met:**
+
+- **Name no longer resolved** (`curl: (6)`, `ERR_NAME_NOT_RESOLVED`). Diagnosis: srv01's DNS answered (`dig @srv01`), but the workstation had **forgotten the split DNS** after a reboot (`resolvectl` settings live in memory). Fix: set it again. Prevention: `navmarket-split-dns.service`, a systemd unit tied to `virbr0` that re-applies it every time the interface appears.
+- **`curl: (7)` on port 443** = connection refused in 1 ms: nothing listening, the HTTPS site was not enabled yet. A firewall would have given a timeout instead.
+- **The "untrusted" test passed by mistake:** `--cacert` only replaces the CA **file**; curl also reads the CA **folder** `/etc/ssl/certs/`, where my CA had just been added. Fix: `--capath` to an empty folder too.
+- **`grep -r` found nothing in `sites-enabled/`:** it skips symlinks. `grep -R` follows them.
 
 ## S4.4 Firewall: only 22, 80, 443
 
 **Why:** every open port is a door. **Default deny**: drop everything, then open only what is needed.
 
-`scripts/firewall/navmarket-srv01.nft` (nftables, the modern iptables):
+`scripts/session-04/s4.4-navmarket-srv01.nft` (nftables, the modern iptables):
 
 - `policy drop` + `ct state established,related accept` (answers come back);
 - `lo` and ICMP allowed (ICMPv6 is required for IPv6 to work);
@@ -77,8 +86,8 @@ scripts/tls/s4.3-https-lab-ca.sh     # from the repo root, on the workstation
 **Safety net:** a `systemd-run` timer deletes the firewall after 120 s; the script cancels it only if it finished, so a bad rule can never lock SSH out for good.
 
 ```bash
-scp scripts/firewall/navmarket-srv01.nft srv01:/tmp/
-scripts/run-on-srv01.sh scripts/firewall/s4.4-firewall.sh docs/session-04/S4.4-proofs.txt
+scp scripts/session-04/s4.4-navmarket-srv01.nft srv01:/tmp/
+scripts/session-04/s4.4-run-on-srv01.sh scripts/session-04/s4.4-firewall.sh docs/session-04/S4.4-proofs.txt
 ```
 
 **Expected:** ports 22, 80, 443 `OPEN`, test port 8081 `BLOCKED` from outside but `200` locally, `nftables` enabled, rollback timer cancelled.
@@ -93,7 +102,7 @@ scripts/run-on-srv01.sh scripts/firewall/s4.4-firewall.sh docs/session-04/S4.4-p
 - Each Nginx worker keeps its own rotation, so the order is not always strictly 1-2-1-2.
 
 ```bash
-scripts/run-on-srv01.sh scripts/proxy/s4.5-reverse-proxy.sh docs/session-04/S4.5-proofs.txt
+scripts/session-04/s4.4-run-on-srv01.sh scripts/session-04/s4.5-reverse-proxy.sh docs/session-04/S4.5-proofs.txt
 ```
 
 **Expected:** answers from `web1` and `web2` · web2 stopped → only `web1`, always `200` · web2 back → shared again.
@@ -116,7 +125,7 @@ Host vps01
 ```
 
 ```bash
-scripts/run-on-srv01.sh scripts/tls/s4.6-letsencrypt-vps.sh docs/session-04/S4.6-proofs.txt \
+scripts/session-04/s4.4-run-on-srv01.sh scripts/session-04/s4.6-letsencrypt-vps.sh docs/session-04/S4.6-proofs.txt \
     vps01 DOMAIN=something.duckdns.org EMAIL=my@email
 ```
 
@@ -139,8 +148,8 @@ scripts/run-on-srv01.sh scripts/tls/s4.6-letsencrypt-vps.sh docs/session-04/S4.6
 **Two causes:** default route via `10.10.1.254` (does not exist), and `resolv.conf` → `10.10.1.53` (no DNS there). **Fix:** `ip route replace default via 10.10.1.1` + the right nameserver.
 
 ```bash
-scp scripts/network/lab-netns.sh srv01:/tmp/
-scripts/run-on-srv01.sh scripts/network/s4x-incident.sh docs/session-04/S4.x-proofs.txt
+scp scripts/session-03/s3.2-lab-netns.sh srv01:/tmp/
+scripts/session-04/s4.4-run-on-srv01.sh scripts/session-04/s4.x-incident.sh docs/session-04/S4.x-proofs.txt
 ```
 
 **Expected:** OK → FAILED / FAILED → diagnosis shows both causes → OK / OK. The lab cleans itself.
