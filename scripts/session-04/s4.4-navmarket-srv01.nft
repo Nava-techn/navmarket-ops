@@ -23,6 +23,7 @@ table inet navmarket_fw {
         tcp dport { 22, 80, 443 } accept       # SSH, HTTP, HTTPS: the 3 public ports
         ip saddr @lab_lan udp dport 53 accept  # DNS from S4.1, only for my lab network
         ip saddr @lab_lan tcp dport 53 accept
+        udp sport 67 udp dport 68 accept       # DHCP answers: srv01 gets its own IP from libvirt (seen in S4.4 step 1)
 
         limit rate 5/minute log prefix "nft-drop: "   # trace what is dropped (journalctl -k)
     }

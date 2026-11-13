@@ -1,0 +1,44 @@
+# S4.4 proofs - 2026-11-13 12:34:32
+
+## 1. From my computer: only the planned ports are open
+port 22: OPEN
+port 80: OPEN
+port 443: OPEN
+port 8081: BLOCKED
+
+## 2. DNS still answers my lab network
+<VM_IP>
+## 3. Inside srv01: the test port answers locally
+curl http://127.0.0.1:8081 -> HTTP 200
+
+## 4. Blocked attempts are logged
+nft-drop: IN=enp1s0 OUT= MAC=52:54:00:70:d4:89:52:54:00:98:9c:69:08:00 SRC=192.168.122.1 DST=<VM_IP> LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=19371 D
+nft-drop: IN=enp1s0 OUT= MAC=52:54:00:70:d4:89:52:54:00:98:9c:69:08:00 SRC=192.168.122.1 DST=<VM_IP> LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=19372 D
+nft-drop: IN=enp1s0 OUT= MAC=52:54:00:70:d4:89:52:54:00:98:9c:69:08:00 SRC=192.168.122.1 DST=<VM_IP> LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=19373 D
+
+## 5. The rules, live
+table inet navmarket_fw {
+	set lab_lan {
+		type ipv4_addr
+		flags interval
+		elements = { 192.168.122.0/24 }
+	}
+
+	chain input {
+		type filter hook input priority filter; policy drop;
+		ct state established,related accept
+		ct state invalid drop
+		iif "lo" accept
+		meta l4proto { icmp, ipv6-icmp } accept
+		tcp dport { 22, 80, 443 } accept
+		ip saddr @lab_lan udp dport 53 accept
+		ip saddr @lab_lan tcp dport 53 accept
+		udp sport 67 udp dport 68 accept
+		limit rate 5/minute burst 5 packets log prefix "nft-drop: "
+	}
+}
+
+## 6. Permanent: loaded again at every boot
+/etc/nftables.conf: syntax OK
+nftables.service: enabled
+last line of /etc/nftables.conf: include "/etc/nftables.d/navmarket.nft"

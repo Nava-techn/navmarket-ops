@@ -7,7 +7,7 @@
 | S4.1 | Internal DNS for `navmarket.lan` (dnsmasq + split DNS) | manual + `scripts/session-04/s4.1-navmarket-split-dns.service` | ✅ 10 Nov |
 | S4.2 | Automatic DHCP (DORA) | manual, see below | ✅ 10 Nov |
 | S4.3 | HTTPS with my own certificate authority | `scripts/session-04/s4.3-https-lab-ca.sh` | ✅ 12 Nov |
-| S4.4 | Firewall: only 22, 80, 443 open | `scripts/session-04/s4.4-firewall.sh` | to run |
+| S4.4 | Firewall: only 22, 80, 443 open | `scripts/session-04/s4.4-navmarket-srv01.nft` | ✅ 13 Nov |
 | S4.5 | Reverse proxy in front of 2 web servers | `scripts/session-04/s4.5-reverse-proxy.sh` | to run |
 | S4.6 | Real domain + Let's Encrypt + fail2ban (vps01) | `scripts/session-04/s4.6-letsencrypt-vps.sh` | to run |
 | S4.x | Incident: name no longer resolves, wrong gateway | `scripts/session-04/s4.x-incident.sh` | to run |
@@ -72,25 +72,18 @@ scripts/session-04/s4.3-https-lab-ca.sh     # from the repo root, on the worksta
 - **The "untrusted" test passed by mistake:** `--cacert` only replaces the CA **file**; curl also reads the CA **folder** `/etc/ssl/certs/`, where my CA had just been added. Fix: `--capath` to an empty folder too.
 - **`grep -r` found nothing in `sites-enabled/`:** it skips symlinks. `grep -R` follows them.
 
-## S4.4 Firewall: only 22, 80, 443
+## S4.4 Firewall: only 22, 80, 443 ✅
 
-**Why:** every open port is a door. **Default deny**: drop everything, then open only what is needed.
+**Why:** every open port is a door. **Default deny**: drop everything, then open only what is needed. Before, any program listening on srv01 was reachable; now a forgotten service stays blocked.
 
-`scripts/session-04/s4.4-navmarket-srv01.nft` (nftables, the modern iptables):
+**Done step by step on 13 Nov:**
 
-- `policy drop` + `ct state established,related accept` (answers come back);
-- `lo` and ICMP allowed (ICMPv6 is required for IPv6 to work);
-- TCP 22, 80, 443 for everyone; DNS 53 **only** from my lab network (S4.1 keeps working);
-- dropped packets logged (`journalctl -k | grep nft-drop`).
+1. **Look first** (`ss -tulpn`): 22 sshd, 80/443 nginx, 53 dnsmasq, local-only services (resolved, chronyd), and **68/udp, the DHCP client of srv01**: srv01 rents its IP from libvirt, so the DHCP answers must get through or srv01 loses its IP.
+2. **Rules** in [`s4.4-navmarket-srv01.nft`](../../scripts/session-04/s4.4-navmarket-srv01.nft) (nftables): `policy drop`, `established,related` first, `lo` and ICMP, TCP 22/80/443, DNS 53 **only from my lab network**, DHCP answers, drops logged. Checked with `nft -c` before applying.
+3. **Applied with a safety net:** a `systemd-run` timer deletes the firewall after 120 s; a **new** SSH connection proved port 22 still works, then the timer was cancelled.
+4. **Permanent:** `/etc/nftables.d/navmarket.nft`, included from `/etc/nftables.conf`, `nftables.service` enabled.
 
-**Safety net:** a `systemd-run` timer deletes the firewall after 120 s; the script cancels it only if it finished, so a bad rule can never lock SSH out for good.
-
-```bash
-scp scripts/session-04/s4.4-navmarket-srv01.nft srv01:/tmp/
-scripts/session-04/s4.4-run-on-srv01.sh scripts/session-04/s4.4-firewall.sh docs/session-04/S4.4-proofs.txt
-```
-
-**Expected:** ports 22, 80, 443 `OPEN`, test port 8081 `BLOCKED` from outside but `200` locally, `nftables` enabled, rollback timer cancelled.
+**Proof** ([S4.4-proofs.txt](S4.4-proofs.txt)): from my computer 22, 80, 443 `OPEN`, test port 8081 `BLOCKED` · the same port answers `HTTP 200` inside srv01 · the blocked attempts appear as `nft-drop:` in `journalctl -k` · boot config `syntax OK`, `enabled`.
 
 ## S4.5 Reverse proxy in front of 2 web servers
 
