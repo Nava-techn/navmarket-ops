@@ -1,3 +1,0 @@
-# S2.3 - Nightly backup, 02:30 every day. Install: /etc/cron.d/navmarket-backup (mode 644)
-# m  h  dom mon dow  user  command
-30 2  *   *   *    root  /usr/local/bin/navmarket-backup.sh
